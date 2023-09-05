@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:get/get.dart';
-import 'package:tes_api/tesmain.dart';
+import 'package:tes_api/view/beranda/tesmain.dart';
 
 class Login extends StatelessWidget {
   const Login({super.key});
