@@ -175,7 +175,6 @@ class MyWidget extends GetView<controllermodel> {
                       itemCount: 4,
                       itemBuilder: (BuildContext context, int index) {
                         return Column(
-                          
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Container(
@@ -202,7 +201,11 @@ class MyWidget extends GetView<controllermodel> {
                                     decoration: BoxDecoration(
                                         color: Color(0xff312828),
                                         borderRadius: BorderRadius.circular(6)),
-                                  child: Center(child: Text("17+",style: TextStyle(color: Colors.white),)),
+                                    child: Center(
+                                        child: Text(
+                                      "17+",
+                                      style: TextStyle(color: Colors.white),
+                                    )),
                                   ),
                                   SizedBox(
                                     width: 10,
@@ -213,50 +216,24 @@ class MyWidget extends GetView<controllermodel> {
                                     decoration: BoxDecoration(
                                         color: Color(0xff312828),
                                         borderRadius: BorderRadius.circular(6)),
-                                  child: Row(
-                                    children: [
-                                      SizedBox(width: 7,),
-                                      Image.asset("assets/icons/star.png"),
-                                      SizedBox(width: 5,),
-                                      Text("4/5",style: TextStyle(color: Colors.white),)
-                                    ],
-                                  ),
+                                    child: Row(
+                                      children: [
+                                        SizedBox(
+                                          width: 7,
+                                        ),
+                                        Image.asset("assets/icons/star.png"),
+                                        SizedBox(
+                                          width: 5,
+                                        ),
+                                        Text(
+                                          "4/5",
+                                          style: TextStyle(color: Colors.white),
+                                        )
+                                      ],
+                                    ),
                                   )
                                 ],
                               ),
-                            ),
-                            SizedBox(height: 10,),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 5),
-                              child: Text("MAD MAX FURY RGAD",style: TextStyle(color: Colors.white),),
-                            )
-                          ],
-                        );
-                      },
-                    ),
-                  ),
-                  SizedBox(height: 16,),
-                  Text("Favourites",style: TextStyle(color: Colors.white,fontSize: 20),),
-                SizedBox(height: 16,),
-                SizedBox(
-                    height: 170,
-                    child: ListView.builder(
-                      scrollDirection: Axis.vertical,
-                      itemCount: 4,
-                      itemBuilder: (BuildContext context, int index) {
-                        return Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Container(
-                              margin: EdgeInsets.only(bottom: 10),
-                              height: 125,
-                              width: 264,
-                              decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(12)),
-                              // child: ClipRRect(
-                              //   child: Image.asset("assets/images/sonic.png"),
-                              // ),
                             ),
                             SizedBox(
                               height: 10,
@@ -264,19 +241,72 @@ class MyWidget extends GetView<controllermodel> {
                             Padding(
                               padding: const EdgeInsets.only(left: 5),
                               child: Text(
-                                "Stranger Things",
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 5),
-                              child: Text(
-                                "Mischief. Mayhem. Soap",
+                                "MAD MAX FURY RGAD",
                                 style: TextStyle(color: Colors.white),
                               ),
                             )
+                          ],
+                        );
+                      },
+                    ),
+                  ),
+                  SizedBox(
+                    height: 16,
+                  ),
+                  Text(
+                    "Favourites",
+                    style: TextStyle(color: Colors.white, fontSize: 20),
+                  ),
+                  SizedBox(
+                    height: 16,
+                  ),
+                  SizedBox(
+                    height: Get.height,
+                    child: ListView.builder(
+                      physics: NeverScrollableScrollPhysics(),
+                      scrollDirection: Axis.vertical,
+                      itemCount: 4,
+                      itemBuilder: (BuildContext context, int index) {
+                        return Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              margin: EdgeInsets.only(bottom: 40),
+                              height: 155,
+                              width: 350,
+                              decoration: BoxDecoration(
+                                  color: Color(0xff2F2525),
+                                  borderRadius: BorderRadius.circular(12)),
+
+
+                              child: Padding(
+                                padding: const EdgeInsets.all(16.0),
+                                child: Row(
+                                  children: [
+                                    Container(
+                                      height: 100,
+                                      width: 85,
+                                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(6),color: Colors.white),
+                                    ),
+                                    SizedBox(width: 15,),
+                                    Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        Text("MAD MAX FURY RGAD",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
+                                        SizedBox(height: 15,),
+                                        Text("4/5 | 8 october 2021",style: TextStyle(color: Color(0xff858585)),),
+                                        SizedBox(height: 15,),
+                                        Text("1 hour 33 min",style: TextStyle(color: Colors.white),)
+                                      ],
+                                    )
+                                  ],
+                                ),
+                              ),
+                            
+                            ),
+                          
+                          
                           ],
                         );
                       },
