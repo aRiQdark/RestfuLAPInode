@@ -3,19 +3,22 @@ import 'dart:convert';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:tes_api/controller/allmodel.dart';
+import 'package:tes_api/model/modelfilm/modelfiml.dart';
 
 class controllermodel extends GetxController {
-  Future<List<Mahasiswa?>> api() async {
-    Uri url = Uri.parse("http://192.168.100.237:3000/tampil");
+  Future<List<Listfilm?>> api() async {
+    
+    Uri url = Uri.parse("http://192.168.100.237:3000/film");
+    await Future.delayed(Duration(seconds: 3));
     try {
       var parse = await http.get(url);
       List<dynamic> jsondata =
-          (jsonDecode(parse.body) as Map<String, dynamic>)['Mahasiswa'];
+          (jsonDecode(parse.body) as Map<String, dynamic>)['Listfilm'];
       print(parse.body);
       if (jsondata == null) {
         return [];
       } else {
-        return jsondata.map((e) => Mahasiswa.fromJson(e)).toList();
+        return jsondata.map((e) => Listfilm.fromJson(e)).toList();
       }
     } catch (e) {
       return [];

@@ -3,9 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:get/get.dart';
+import 'package:lottie/lottie.dart';
 import 'package:tes_api/controller/allmodel.dart';
 import 'package:tes_api/controller/detaill.dart';
 import 'package:tes_api/controller/controllermodel.dart';
+import 'package:tes_api/model/modelfilm/modelfiml.dart';
+import 'package:tes_api/view/detail-menu/detailfilm.dart';
+import 'package:tes_api/view/loading/loadingasset.dart';
 
 class MyWidget extends GetView<controllermodel> {
   @override
@@ -13,19 +17,18 @@ class MyWidget extends GetView<controllermodel> {
     Get.put(controllermodel());
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 21, 22, 31),
-      body: FutureBuilder<List<Mahasiswa?>>(
+      body: FutureBuilder<List<Listfilm?>>(
           future: controller.api(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return Center(
-                child: CircularProgressIndicator(),
-              );
+              return Center(child: loadingasset());
             }
             if (!snapshot.hasData) {
               return Center(
-                child: CircularProgressIndicator(),
+                child: loadingasset(),
               );
             }
+            List<Listfilm?>? Api = snapshot.data;
 
             return Padding(
               padding: const EdgeInsets.all(21.0),
@@ -100,7 +103,48 @@ class MyWidget extends GetView<controllermodel> {
                     ),
                   ),
                   SizedBox(
-                    height: 16,
+                    height: 20,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Container(
+                        height: 50,
+                        width: 100,
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.white),
+                          borderRadius: BorderRadius.circular(8)
+                        ),
+                      child: Center(
+                        child: Text("Action",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
+                      ),
+                      ),
+                       Container(
+                        height: 50,
+                        width: 100,
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.white),
+                          borderRadius: BorderRadius.circular(8)
+                        ),
+                          child: Center(
+                        child: Text("Advanture",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
+                      ),
+                      ),
+                       Container(
+                        height: 50,
+                        width: 100,
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.white),
+                          borderRadius: BorderRadius.circular(8)
+                        ),
+                          child: Center(
+                        child: Text("romance",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
+                      ),
+                      )
+                    ],
+                  ),
+                   SizedBox(
+                    height: 20,
                   ),
                   Text(
                     "Populer Movies",
@@ -115,46 +159,49 @@ class MyWidget extends GetView<controllermodel> {
                   SizedBox(
                     height: 170,
                     child: CarouselSlider.builder(
-                        itemCount: 4,
+                        itemCount: Api?.length,
                         itemBuilder: (context, index, realIndex) {
-                          return Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Container(
-                                margin: EdgeInsets.only(right: 15),
-                                height: 125,
-                                width: 264,
-                                decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(12)),
-                                // child: ClipRRect(
-                                //   child: Image.asset("assets/images/sonic.png"),
-                                // ),
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(left: 5),
-                                child: Text(
-                                  "Stranger Things",
-                                  style: TextStyle(
+                          return InkWell(
+                            onTap: () => Get.to(detailfilm(),arguments: Api),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                  margin: EdgeInsets.only(right: 15),
+                                  height: 125,
+                                  width: 264,
+                                  decoration: BoxDecoration(
                                       color: Colors.white,
-                                      fontWeight: FontWeight.bold),
+                                      borderRadius: BorderRadius.circular(12)),
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(12),
+                                    child: Image.network("${Api?[index]?.image}",fit: BoxFit.cover,),
+                                  ),
                                 ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(left: 5),
-                                child: Text(
-                                  "Mischief. Mayhem. Soap",
-                                  style: TextStyle(color: Colors.white),
+                                SizedBox(
+                                  height: 10,
                                 ),
-                              )
-                            ],
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 5),
+                                  child: Text(
+                                    "${Api?[index]?.jdlFilm}",
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 5),
+                                  child: Text(
+                                    "${Api?[index]?.direct}",
+                                    style: TextStyle(color: Colors.white),
+                                  ),
+                                )
+                              ],
+                            ),
                           );
                         },
-                        options: CarouselOptions(
-                             autoPlay: true)),
+                        options: CarouselOptions(autoPlay: true)),
                   ),
                   SizedBox(
                     height: 18,
@@ -171,9 +218,10 @@ class MyWidget extends GetView<controllermodel> {
                   ),
                   SizedBox(
                     height: 280,
+                    width: Get.width,
                     child: ListView.builder(
                       scrollDirection: Axis.horizontal,
-                      itemCount: 4,
+                      itemCount: Api?.length,
                       itemBuilder: (BuildContext context, int index) {
                         return Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -185,9 +233,10 @@ class MyWidget extends GetView<controllermodel> {
                               decoration: BoxDecoration(
                                   color: Colors.white,
                                   borderRadius: BorderRadius.circular(12)),
-                              // child: ClipRRect(
-                              //   child: Image.asset("assets/images/sonic.png"),
-                              // ),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(12),
+                                child: Image.network("${Api?[index]?.image}",fit: BoxFit.cover),
+                              ),
                             ),
                             SizedBox(
                               height: 10,
@@ -204,7 +253,7 @@ class MyWidget extends GetView<controllermodel> {
                                         borderRadius: BorderRadius.circular(6)),
                                     child: Center(
                                         child: Text(
-                                      "17+",
+                                      "${Api?[index]?.usiaminimal}+",
                                       style: TextStyle(color: Colors.white),
                                     )),
                                   ),
@@ -227,7 +276,7 @@ class MyWidget extends GetView<controllermodel> {
                                           width: 5,
                                         ),
                                         Text(
-                                          "4/5",
+                                          "${Api?[index]?.ratingFilm}",
                                           style: TextStyle(color: Colors.white),
                                         )
                                       ],
@@ -239,11 +288,17 @@ class MyWidget extends GetView<controllermodel> {
                             SizedBox(
                               height: 10,
                             ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 5),
-                              child: Text(
-                                "MAD MAX FURY RGAD",
-                                style: TextStyle(color: Colors.white),
+                            Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.only(left: 30),
+                                child: Text(
+                                  "${Api?[index]?.jdlFilm}",
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 2,
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold),
+                                ),
                               ),
                             )
                           ],

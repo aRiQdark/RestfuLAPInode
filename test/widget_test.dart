@@ -13,9 +13,6 @@ import 'package:tes_api/main.dart';
 void main() {
  Future<void> api() async {
 
-Uri url = Uri.parse("http://api.alquran.cloud/v1/surah");
-var parse = await http.get(url);
-print(parse.body);
 
 }
 }
