@@ -1,3 +1,5 @@
+//koneksi
+
 var mysql = require('mysql');
 
 const conn = mysql.createConnection({
