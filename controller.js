@@ -23,6 +23,8 @@ exports.tampilsemuadata = function(req,res){
     
 }
 
+
+
 exports.tampilid = function(req,res){
 let id = req.params.id;
     Connection.query(
@@ -38,6 +40,22 @@ let id = req.params.id;
     
     
 }
+
+exports.tampilnama = function(req,res){
+    let nama = req.params.nama;
+        Connection.query(
+            'SELECT * FROM mahasiswa WHERE nama = ?',[nama],function(error,rows,fields){
+                if (error) {
+                    Connection.log(error);
+                }else{
+                    response.ok(rows,res)
+                }
+            }
+        )
+    
+        
+        
+    }
 exports.datafilm = function(req,res){
 
     Connection.query(
@@ -82,3 +100,19 @@ exports.tampilidfilm = function(req,res){
             
             
         }
+        exports.ttampilanberdasarktitle = function(req,res){
+            let Title = req.params.Title;
+            Connection.query(
+                'SELECT * FROM tb_film WHERE Title = ?',[Title],function(error,rows,fields){
+                    if (error) {
+                        Connection.log(error);
+                    }else{
+                        response.ok(rows,res)
+                    }
+                }
+            )
+        
+            
+                
+                
+            }
