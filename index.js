@@ -1,20 +1,11 @@
-const bodyParser = require("body-parser");
 const express = require("express");
+
 const app = express();
 
+const port = process.env.PORT || 3000;
 
-//parse body
-app.use(bodyParser.urlencoded({extended: true}));
-app.use(bodyParser.json());
-
-//dibuat setelah membuat routes
-var routes = require('./router');
-routes(app);
 app.get("/", (req, res) => res.send("Hello world"));
 app.get("/ping", (req, res) => res.send("Pong"));
 app.get("/felix", (req, res) => res.send("Liawi"));
 
-app.listen(3000, () => {
-    console.log(`Server started on port`);
- });
-
+app.listen(port, () => console.log(`Server is listening on port ${port}`));
