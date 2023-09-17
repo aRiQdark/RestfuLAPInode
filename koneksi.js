@@ -3,7 +3,7 @@
 var mysql = require('mysql');
 
 const conn = mysql.createConnection({
-    host:'localhost',
+    host:'https://lazy-pear-fox-tie.cyclic.cloud/',
     user:'root',
     password:'',
     database:'restfulapi',
